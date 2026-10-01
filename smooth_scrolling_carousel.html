@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Scrolling CSS Carousel & Banner</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for modern icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .animate-marquee-left {
+            display: flex;
+            width: max-content;
+            animation: scrollLeft var(--speed, 35s) linear infinite;
+        }
+
+        .animate-marquee-right {
+            display: flex;
+            width: max-content;
+            animation: scrollRight var(--speed, 35s) linear infinite;
+        }
+
+        /* Pause animation on hover if desired */
+        .pause-hover:hover .animate-marquee-left,
+        .pause-hover:hover .animate-marquee-right {
+            animation-play-state: paused;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200 shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
+                    <i class="fa-solid fa-infinity text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">MarqueeFlow</span>
+                    <span class="block text-xs font-medium text-slate-400">Pure CSS & Tailwind Infinite Tickers</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#logos" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition">Logos</a>
+                <a href="#cards" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition">Cards</a>
+                <a href="#playground" class="text-sm font-medium px-4 py-2 bg-indigo-600 text-white rounded-xl shadow-md shadow-indigo-500/20 hover:bg-indigo-700 transition">Playground</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-b from-white to-slate-100 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-600 border border-indigo-100 mb-6 shadow-sm">
+                <i class="fa-solid fa-bolt mr-1.5 text-indigo-500"></i> Smooth GPU-Accelerated CSS Animations
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight max-w-4xl mx-auto leading-tight">
+                Infinite, Fluid Scrolling Carousels in <span class="bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600 bg-clip-text text-transparent">CSS & Tailwind</span>
+            </h1>
+            <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                Build buttery-smooth moving banners, partner logos, and notification tickers using pure CSS keyframes with zero heavy JavaScript loops.
+            </p>
+            <div class="mt-10 flex flex-wrap justify-center gap-4">
+                <a href="#playground" class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/25 transition flex items-center space-x-2">
+                    <span>Try Interactive Controls</span>
+                    <i class="fa-solid fa-arrow-down text-sm"></i>
+                </a>
+                <a href="#code" onclick="copyCodeSnippet(event)" class="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-xl border border-slate-200 shadow-sm transition flex items-center space-x-2">
+                    <i class="fa-solid fa-code text-indigo-600"></i>
+                    <span>Copy CSS Snippet</span>
+                </a>
+            </div>
+        </div>
+        <!-- Decorative background glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-300/20 blur-[120px] rounded-full pointer-events-none"></div>
+    </section>
+
+    <main class="flex-grow space-y-24 py-16">
+
+        <section id="logos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 text-indigo-600 font-semibold text-sm mb-2">
+                        <i class="fa-solid fa-building"></i>
+                        <span>PARTNER BANNER EXAMPLE</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Seamless Logo Marquee</h2>
+                </div>
+                <p class="text-slate-500 text-sm mt-2 md:mt-0 max-w-md">
+                    Perfect for brand sponsors, client logos, or tech stacks. Duplicated list items ensure seamless infinite looping.
+                </p>
+            </div>
+
+            <!-- Logo Marquee Container -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm relative overflow-hidden pause-hover group">
+                <!-- Gradient Edge Fades for smoothness -->
+                <div class="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+                <div class="overflow-hidden">
+                    <div id="logoTrack" class="animate-marquee-left items-center space-x-16" style="--speed: 30s;">
+                        <!-- Item set 1 -->
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-stripe text-3xl"></i><span>Stripe</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-figma text-3xl"></i><span>Figma</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-github text-3xl"></i><span>GitHub</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-slack text-3xl"></i><span>Slack</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-spotify text-3xl"></i><span>Spotify</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-airbnb text-3xl"></i><span>Airbnb</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-discord text-3xl"></i><span>Discord</span>
+                        </div>
+
+                        <!-- Item set 2 (Duplicate for infinite loop) -->
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-stripe text-3xl"></i><span>Stripe</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-figma text-3xl"></i><span>Figma</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-github text-3xl"></i><span>GitHub</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-slack text-3xl"></i><span>Slack</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-spotify text-3xl"></i><span>Spotify</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-airbnb text-3xl"></i><span>Airbnb</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 font-bold text-xl grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer">
+                            <i class="fa-brands fa-discord text-3xl"></i><span>Discord</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cards" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 text-violet-600 font-semibold text-sm mb-2">
+                        <i class="fa-solid fa-id-card"></i>
+                        <span>CARD TICKER EXAMPLE</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Interactive Feature Cards</h2>
+                </div>
+                <p class="text-slate-500 text-sm mt-2 md:mt-0 max-w-md">
+                    Great for customer reviews, blog posts, product showcases, or team stats moving steadily across the screen.
+                </p>
+            </div>
+
+            <!-- Card Ticker Container -->
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 border border-slate-800 rounded-3xl p-8 shadow-xl relative overflow-hidden pause-hover">
+                <!-- Gradient Edge Fades for dark theme -->
+                <div class="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-indigo-950 to-transparent z-10 pointer-events-none"></div>
+
+                <div class="overflow-hidden">
+                    <div id="cardTrack" class="animate-marquee-right items-center space-x-6 py-4" style="--speed: 40s;">
+                        <!-- Card Set 1 -->
+                        <div class="w-80 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-white hover:bg-white/15 transition duration-300 shrink-0">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Growth</span>
+                                <i class="fa-solid fa-chart-line text-emerald-400 text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">+240% Revenue Increase</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">Companies using automated Marquee banners experience higher engagement and click-through rates.</p>
+                        </div>
+
+                        <div class="w-80 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-white hover:bg-white/15 transition duration-300 shrink-0">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/20 text-sky-400 border border-sky-500/30">Performance</span>
+                                <i class="fa-solid fa-gauge-high text-sky-400 text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">Zero JavaScript Lag</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">Built entirely with CSS keyframe transforms, ensuring silky smooth 60fps scrolling on mobile and desktop.</p>
+                        </div>
+
+                        <div class="w-80 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-white hover:bg-white/15 transition duration-300 shrink-0">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30">Design</span>
+                                <i class="fa-solid fa-wand-magic-sparkles text-purple-400 text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">Responsive & Adaptive</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">Customize speeds instantly, pause on hover, or flip direction with simple CSS custom property updates.</p>
+                        </div>
+
+                        <div class="w-80 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-white hover:bg-white/15 transition duration-300 shrink-0">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-400 border border-amber-500/30">Security</span>
+                                <i class="fa-solid fa-shield-halved text-amber-400 text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">Enterprise Ready</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">Reliable cross-browser rendering with hardware acceleration and automatic pause controls.</p>
+                        </div>
+
+                        <!-- Card Set 2 (Duplicate for infinite loop) -->
+                        <div class="w-80 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-white hover:bg-white/15 transition duration-300 shrink-0">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Growth</span>
+                                <i class="fa-solid fa-chart-line text-emerald-400 text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">+240% Revenue Increase</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">Companies using automated Marquee banners experience higher engagement and click-through rates.</p>
+                        </div>
+
+                        <div class="w-80 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-white hover:bg-white/15 transition duration-300 shrink-0">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/20 text-sky-400 border border-sky-500/30">Performance</span>
+                                <i class="fa-solid fa-gauge-high text-sky-400 text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">Zero JavaScript Lag</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">Built entirely with CSS keyframe transforms, ensuring silky smooth 60fps scrolling on mobile and desktop.</p>
+                        </div>
+
+                        <div class="w-80 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-white hover:bg-white/15 transition duration-300 shrink-0">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30">Design</span>
+                                <i class="fa-solid fa-wand-magic-sparkles text-purple-400 text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">Responsive & Adaptive</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">Customize speeds instantly, pause on hover, or flip direction with simple CSS custom property updates.</p>
+                        </div>
+
+                        <div class="w-80 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-white hover:bg-white/15 transition duration-300 shrink-0">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-400 border border-amber-500/30">Security</span>
+                                <i class="fa-solid fa-shield-halved text-amber-400 text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">Enterprise Ready</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">Reliable cross-browser rendering with hardware acceleration and automatic pause controls.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="playground" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-sm">
+                <div class="max-w-3xl mx-auto text-center mb-10">
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">Live Customizer</span>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-3">Test & Control Carousel Parameters</h2>
+                    <p class="text-slate-500 text-sm mt-2">Adjust speed, switch directions, or toggle pause state on the fly.</p>
+                </div>
+
+                <!-- Controls Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <!-- Speed Control -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">
+                            Speed: <span id="speedValue" class="text-indigo-600 font-bold">35s</span>
+                        </label>
+                        <input type="range" id="speedRange" min="10" max="80" value="35" class="w-full accent-indigo-600 cursor-pointer">
+                    </div>
+
+                    <!-- Direction Control -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Direction</label>
+                        <div class="flex rounded-xl bg-slate-200 p-1">
+                            <button id="dirLeftBtn" onclick="setDirection('left')" class="flex-1 py-1.5 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm transition">Left</button>
+                            <button id="dirRightBtn" onclick="setDirection('right')" class="flex-1 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition">Right</button>
+                        </div>
+                    </div>
+
+                    <!-- Pause/Resume Control -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Playback State</label>
+                        <button id="pauseToggleBtn" onclick="togglePauseState()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-xl shadow-md transition flex items-center justify-center space-x-1.5">
+                            <i id="pauseIcon" class="fa-solid fa-pause"></i>
+                            <span id="pauseText">Pause Animation</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="code" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-900 rounded-3xl p-8 sm:p-10 shadow-xl text-slate-100 border border-slate-800">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold flex items-center space-x-2">
+                            <i class="fa-solid fa-file-code text-indigo-400"></i>
+                            <span>Copy & Paste CSS Keyframe Code</span>
+                        </h3>
+                        <p class="text-slate-400 text-sm mt-1">Drop this snippet into your stylesheet to create infinite marquees instantly.</p>
+                    </div>
+                    <button onclick="copyCodeSnippet(event)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl shadow-lg transition flex items-center space-x-2">
+                        <i class="fa-solid fa-copy"></i>
+                        <span id="copyBtnText">Copy CSS</span>
+                    </button>
+                </div>
+                <pre class="bg-slate-950 p-6 rounded-2xl overflow-x-auto text-xs sm:text-sm text-indigo-200 font-mono border border-slate-800/80 leading-relaxed"><code>@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: scrollLeft 35s linear infinite;
+}
+
+/* Pause on hover */
+.animate-marquee:hover {
+  animation-play-state: paused;
+}</code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-8 text-center text-slate-500 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 MarqueeFlow UI. Built with Tailwind CSS & CSS Keyframe Animations.</p>
+            <div class="flex space-x-6 text-slate-400">
+                <a href="#" class="hover:text-indigo-600 transition"><i class="fa-brands fa-github text-lg"></i></a>
+                <a href="#" class="hover:text-indigo-600 transition"><i class="fa-brands fa-twitter text-lg"></i></a>
+                <a href="#" class="hover:text-indigo-600 transition"><i class="fa-solid fa-globe text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Speed range control
+        const speedRange = document.getElementById('speedRange');
+        const speedValue = document.getElementById('speedValue');
+        const logoTrack = document.getElementById('logoTrack');
+        const cardTrack = document.getElementById('cardTrack');
+
+        speedRange.addEventListener('input', (e) => {
+            const val = e.target.value + 's';
+            speedValue.textContent = val;
+            logoTrack.style.setProperty('--speed', val);
+            cardTrack.style.setProperty('--speed', val);
+        });
+
+        // Direction control
+        let currentDirection = 'left';
+        function setDirection(dir) {
+            currentDirection = dir;
+            const leftBtn = document.getElementById('dirLeftBtn');
+            const rightBtn = document.getElementById('dirRightBtn');
+
+            if (dir === 'left') {
+                logoTrack.className = 'animate-marquee-left items-center space-x-16';
+                cardTrack.className = 'animate-marquee-right items-center space-x-6 py-4'; // Inverse for visual variety
+                leftBtn.className = 'flex-1 py-1.5 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm transition';
+                rightBtn.className = 'flex-1 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition';
+            } else {
+                logoTrack.className = 'animate-marquee-right items-center space-x-16';
+                cardTrack.className = 'animate-marquee-left items-center space-x-6 py-4';
+                rightBtn.className = 'flex-1 py-1.5 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm transition';
+                leftBtn.className = 'flex-1 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition';
+            }
+        }
+
+        // Pause state control
+        let isPaused = false;
+        function togglePauseState() {
+            isPaused = !isPaused;
+            const pauseIcon = document.getElementById('pauseIcon');
+            const pauseText = document.getElementById('pauseText');
+            const pauseToggleBtn = document.getElementById('pauseToggleBtn');
+
+            if (isPaused) {
+                logoTrack.style.animationPlayState = 'paused';
+                cardTrack.style.animationPlayState = 'paused';
+                pauseIcon.className = 'fa-solid fa-play';
+                pauseText.textContent = 'Resume Animation';
+                pauseToggleBtn.className = 'w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl shadow-md transition flex items-center justify-center space-x-1.5';
+            } else {
+                logoTrack.style.animationPlayState = 'running';
+                cardTrack.style.animationPlayState = 'running';
+                pauseIcon.className = 'fa-solid fa-pause';
+                pauseText.textContent = 'Pause Animation';
+                pauseToggleBtn.className = 'w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-xl shadow-md transition flex items-center justify-center space-x-1.5';
+            }
+        }
+
+        // Copy code snippet helper
+        function copyCodeSnippet(e) {
+            e.preventDefault();
+            const codeText = `@keyframes scrollLeft {\n  0% { transform: translateX(0); }\n  100% { transform: translateX(-50%); }\n}\n\n.animate-marquee {\n  display: flex;\n  width: max-content;\n  animation: scrollLeft 35s linear infinite;\n}`;
+            
+            document.execCommand('copy');
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopiedFeedback();
+                }).catch(() => {
+                    fallbackCopy(codeText);
+                });
+            } else {
+                fallbackCopy(codeText);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showCopiedFeedback();
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showCopiedFeedback() {
+            const btnText = document.getElementById('copyBtnText');
+            if (btnText) {
+                btnText.textContent = 'Copied!';
+                setTimeout(() => {
+                    btnText.textContent = 'Copy CSS';
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
