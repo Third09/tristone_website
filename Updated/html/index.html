@@ -154,48 +154,32 @@
   </div>
 
 
-  <div class="gallery-container">
-    
-    <!-- Main Images -->
-    <div class="mySlides">
-      <img src="Updated/images/about-img-1.jpg" class="main-gallery-img">
-    </div>
-    <div class="mySlides">
-      <img src="Updated/images/about-img-2.jpg" class="main-gallery-img">
-    </div>
-    <div class="mySlides">
-      <img src="Updated/images/about-img-3.jpg" class="main-gallery-img">
-    </div>
-    <div class="mySlides">
-      <img src="Updated/images/night-house-img-header 3.jpg" class="main-gallery-img">
+ <!-- Category Dropdown Selector -->
+    <div class="gallery-controls">
+        <label for="category-select">Select Group:</label>
+        <select id="category-select">
+            <option value="nature">Nature</option>
+            <option value="architecture">Architecture</option>
+            <option value="travel">Travel</option>
+        </select>
     </div>
 
-    <!-- Navigation Arrows -->
-    <a class="prev" onclick="plusSlides(-1)">❮</a>
-    <a class="next" onclick="plusSlides(1)">❯</a>
+    <!-- Gallery Container -->
+    <div class="gallery-container">
+        <!-- Main Large Image Viewer with Arrow Buttons -->
+        <div class="main-viewer">
+            <button id="prev-btn" class="nav-arrow left-arrow">&#10094;</button>
+            <img id="main-image" src="" alt="Main Gallery Image">
+            <button id="next-btn" class="nav-arrow right-arrow">&#10095;</button>
+            <div id="image-title" class="image-title"></div>
+        </div>
 
-    <!-- Caption -->
-    <div class="caption-container">
-      <p id="caption"></p>
+        <!-- Thumbnail Filmstrip Below -->
+        <div id="thumbnail-strip" class="thumbnail-strip">
+            <!-- Thumbnails will be injected dynamically via JS -->
+        </div>
     </div>
 
-    <!-- Thumbnails -->
-    <div class="gallery-thumbnails">
-      <div class="thumb-column">
-        <img class="demo cursor" src="Updated/images/about-img-1.jpg" onclick="currentSlide(1)" alt="Refined interiors with a fresh, contemporary feel.">
-      </div>
-      <div class="thumb-column">
-        <img class="demo cursor" src="Updated/images/about-img-2.jpg" onclick="currentSlide(2)" alt="Modern living spaces with optimal natural light.">
-      </div>
-      <div class="thumb-column">
-        <img class="demo cursor" src="Updated/images/about-img-3.jpg" onclick="currentSlide(3)" alt="Luxury finishes and open-concept design.">
-      </div>
-      <div class="thumb-column">
-        <img class="demo cursor" src="Updated/images/night-house-img-header 3.jpg" onclick="currentSlide(4)" alt="Exterior view at twilight.">
-      </div>
-    </div>
-
-  </div>
 </div>
 
 <section id="about" class="aboutus-header-section">
