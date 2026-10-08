@@ -1,7 +1,7 @@
 // Sample data grouped by categories
 const galleryData = {
     nature: [
-        { url: "https://picsum.photos/id/10/800/450", title: "Forest Stream" },
+        { url: "../images/image 59.png", title: "Forest Stream" },
         { url: "https://picsum.photos/id/15/800/450", title: "Water Waterfall" },
         { url: "https://picsum.photos/id/29/800/450", title: "Misty Mountains" },
         { url: "https://picsum.photos/id/54/800/450", title: "Green Valley" }

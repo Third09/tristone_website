@@ -42,7 +42,7 @@ nav.site-header {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: #17171750;
+  background-color: #17171775;
   padding: 15px 24px;
   z-index: 1000;
   opacity: 1;
@@ -84,7 +84,7 @@ nav img {
   background-color: #FF9500;
   color: #fff;
   border: none;
-  padding: 15px 30px;
+  padding: 10px 50px;
   border-radius: 6px;
   font-size: 1.7rem;
   cursor: pointer;
@@ -459,7 +459,7 @@ flex-direction: column;
 
 /* Gallery Container */
 .gallery-container {
-    max-width: 800px;
+    min-width: 50%;
     margin: 0 auto;
 }
 
