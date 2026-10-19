@@ -662,6 +662,39 @@ flex-direction: column;
   margin-bottom: 40px !important;
 }
 
+
+.site-footer {
+  background-color: #161616;
+  color: #a3a3a3;
+  padding: 40px 24px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.footer-container {
+  width: 100%;
+  min-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-left h3 {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.footer-left p,
+.footer-right p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
 /* Responsive Scaling for About Page */
 @media (max-width: 1023px) {
   .aboutus-main-title {
