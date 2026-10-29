@@ -390,6 +390,7 @@ flex-direction: column;
 }
 
 .projects-header-wrapper {
+  width: 100%; /* without this the flex parent shrinks the gallery to its content */
   max-width: 1200px;
   margin: 0 auto 40px auto;
 }
@@ -459,7 +460,7 @@ flex-direction: column;
 
 /* Gallery Container */
 .gallery-container {
-    min-width: 50%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -467,7 +468,9 @@ flex-direction: column;
 .main-viewer {
     position: relative;
     width: 100%;
-    height: 450px;
+    aspect-ratio: 16 / 9;   /* grows with the width instead of a fixed 450px */
+    max-height: 80vh;
+    border-radius: 8px;
     background-color: #eee;
     display: flex;
     align-items: center;
@@ -520,30 +523,54 @@ flex-direction: column;
 }
 
 /* Thumbnail Filmstrip */
+/* Thumbnails share the full width of the main image in equal columns.
+   With many photos they keep a minimum size and the row scrolls sideways. */
 .thumbnail-strip {
-    display: flex;
-    gap: 10px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(140px, 1fr);
+    gap: 12px;
     overflow-x: auto;
     padding-bottom: 5px;
 }
 
-.thumbnail-strip img {
-    width: 100px;
-    height: 70px;
-    object-fit: cover;
+.thumb-btn {
+    padding: 0;
+    border: 3px solid transparent;
+    border-radius: 6px;
+    background: none;
+    overflow: hidden;
     cursor: pointer;
     opacity: 0.6;
-    border: 2px solid transparent;
     transition: opacity 0.2s, border-color 0.2s;
 }
 
-.thumbnail-strip img:hover {
+.thumb-btn img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.thumb-btn:hover {
     opacity: 1;
 }
 
-.thumbnail-strip img.active {
+.thumb-btn.active {
     opacity: 1;
-    border-color: #000;
+    border-color: #FF9500;
+}
+
+.thumb-btn:focus-visible {
+    outline: 2px solid #0b1120;
+    outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+    .thumbnail-strip {
+        grid-auto-columns: minmax(72px, 1fr);
+        gap: 8px;
+    }
 }
 
 /* Mobile Scaling */
@@ -746,4 +773,391 @@ flex-direction: column;
   body { font-size: 16px; }
   .container { max-width: 1200px; margin: 0 auto; padding: 32px; }
   .main-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+}
+/* ===== Services carousel arrows ===== */
+.cards-carousel {
+  position: relative;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 50%;
+  background-color: #FF9500;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-arrow[hidden] {
+  display: none;
+}
+
+.carousel-arrow svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.carousel-arrow:hover {
+  background-color: #e08500;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-arrow:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.carousel-arrow-prev {
+  left: 20px;
+}
+
+.carousel-arrow-next {
+  right: 20px;
+}
+
+@media (max-width: 767px) {
+  .carousel-arrow {
+    width: 44px;
+    height: 44px;
+  }
+  .carousel-arrow-prev { left: 10px; }
+  .carousel-arrow-next { right: 10px; }
+}
+
+/* =====================================================
+   NAV: tablets & phones (desktop is untouched)
+   ===================================================== */
+.nav-burger {
+  display: none; /* hidden on desktop */
+}
+
+@media (max-width: 1023px) {
+  nav.site-header {
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 0;
+    padding: 12px 20px;
+  }
+
+  nav img {
+    height: 48px;
+  }
+
+  nav .menu-toggle {
+    padding: 8px 18px;
+    font-size: 1rem;
+  }
+
+  /* Push Get Quote + burger to the right, next to each other */
+  nav.site-header > a:has(.menu-toggle) {
+    margin-left: auto;
+  }
+
+  .nav-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0 9px;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .nav-burger span {
+    display: block;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+
+  /* Burger turns into an X when open */
+  nav.nav-open .nav-burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  nav.nav-open .nav-burger span:nth-child(2) { opacity: 0; }
+  nav.nav-open .nav-burger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* Links become a dropdown panel under the nav */
+  nav.site-header .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 0;
+    background-color: rgba(23, 23, 23, 0.97);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  nav.site-header.nav-open .nav-links {
+    display: flex;
+  }
+
+  nav.site-header .nav-links a {
+    font-size: 1.15rem;
+    padding: 14px 24px;
+    border-left: 3px solid transparent;
+  }
+
+  nav.site-header .nav-links a:hover {
+    border-left-color: #FF9500;
+    background-color: rgba(255, 255, 255, 0.05);
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 767px) {
+  nav.site-header {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  nav img {
+    height: 40px;
+  }
+
+  nav .menu-toggle {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* =====================================================
+   HOME PAGE SECTIONS: tablets & phones (desktop is untouched)
+   ===================================================== */
+@media (max-width: 1023px) {
+  /* --- Hero --- */
+  .hero-content {
+    padding: 0 24px;
+  }
+  .top-content {
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-content .line {
+    width: 50px;
+    margin: 0;
+  }
+  .hero-content .top {
+    font-size: 1.4rem;
+    margin-bottom: 0;
+  }
+  .hero-content .mid {
+    font-size: 4rem;
+    line-height: 1.05;
+    margin: 18px 0;
+  }
+  .hero-content .bot {
+    font-size: 1.4rem;
+    width: 100%;
+    max-width: 640px;
+  }
+  .bot-content {
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .hero-content .menu-toggle {
+    font-size: 1.2rem;
+    padding: 12px 32px;
+  }
+  .phone {
+    margin-top: 0;
+    font-size: 1.2rem;
+    padding: 12px 18px;
+  }
+
+  /* --- Services --- */
+  .servhead {
+    margin-top: 40px;
+  }
+  .servtop {
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+    padding: 0 20px;
+  }
+  .servtop .servbig,
+  .servtop .servsmall {
+    width: 100%;
+    margin: 0;
+    text-align: left;
+  }
+  .servtop .servbig {
+    font-size: 3.5rem;
+    line-height: 1.1;
+  }
+  .servtop .servsmall {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .cards {
+    margin-top: 30px;
+    padding-right: 20px;
+  }
+  .card {
+    flex-basis: 380px;
+    height: auto; /* no big empty gap under the photo */
+    padding: 24px;
+  }
+  .card-number {
+    font-size: 2.8rem;
+  }
+  .card-title {
+    font-size: 1.4rem;
+  }
+
+  /* --- Projects (no forced 90vh height, so no empty gap under it) --- */
+  .container2 {
+    min-height: 0;
+  }
+  .projects-header-wrapper {
+    margin-bottom: 0;
+  }
+
+  /* --- About --- */
+  .aboutus-text-content p {
+    font-size: 1.15rem;
+  }
+
+  /* --- Footer (it had min-width: 1600px, which pushed it off screen) --- */
+  .footer-container {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  /* --- Hero --- */
+  .hero-content .top {
+    font-size: 1.05rem;
+  }
+  .hero-content .line {
+    width: 32px;
+    height: 4px;
+  }
+  .hero-content .mid {
+    font-size: 2.4rem;
+    margin: 14px 0;
+  }
+  .hero-content .bot {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .bot-content {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .hero-content .menu-toggle {
+    font-size: 1.05rem;
+    padding: 12px 28px;
+  }
+  .phone {
+    font-size: 1rem;
+    padding: 10px 16px;
+  }
+  .skip-btn {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  /* --- Services --- */
+  .servhead {
+    margin-top: 30px;
+  }
+  .servhead h1 {
+    font-size: 1.4rem;
+  }
+  .servtop .servbig {
+    font-size: 2.6rem;
+  }
+  .servtop .servsmall {
+    font-size: 0.95rem;
+  }
+  .cards {
+    gap: 14px;
+    padding-left: 20px;
+  }
+  .card {
+    flex-basis: 82vw; /* a bit of the next card peeks in, so people know to swipe */
+    padding: 20px;
+  }
+  .card-number {
+    font-size: 2.2rem;
+  }
+  .card-icon {
+    height: 38px;
+  }
+  .card-title {
+    font-size: 1.2rem;
+  }
+  .card-img-wrapper {
+    height: 170px;
+  }
+
+  /* --- Projects --- */
+  .projects-section {
+    padding: 50px 20px;
+  }
+  .projects-main-title {
+    font-size: 2.4rem;
+  }
+  .image-title {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+  .nav-arrow {
+    font-size: 1.1rem;
+    padding: 8px 11px;
+  }
+
+  /* --- About --- */
+  .aboutus-header-section {
+    padding: 40px 20px 24px 20px;
+  }
+  .aboutus-main-title {
+    font-size: 2.4rem;
+  }
+  .aboutus-text-col {
+    padding: 36px 20px;
+  }
+  .aboutus-text-content p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .aboutus-img-col {
+    min-height: 240px;
+  }
+
+  /* --- Footer --- */
+  .site-footer {
+    padding: 30px 20px;
+  }
+  .footer-container {
+    flex-direction: column;
+    gap: 14px;
+  }
 }
