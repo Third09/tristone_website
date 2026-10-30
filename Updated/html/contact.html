@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - Tri-Stone Construction</title>
   <link rel="stylesheet" href="/Updated/css/contact.css">
 </head>
+
 <body>
 
   <div class="page-wrapper">
     <!-- Navigation Bar -->
-  <nav class="site-header nav-hidden">
+    <nav class="site-header nav-hidden">
       <a href="/Updated/html/index.html#index">
-          <img src="/Updated/images/tristone logo white.png" alt="Tri-Stone Logo">
+        <img src="/Updated/images/tristone logo white.png" alt="Tri-Stone Logo">
       </a>
-      
+
       <div class="nav-links" id="nav-links">
-          <a href="/Updated/html/index.html#index">Home</a>
-          <a href="/Updated/html/index.html#services">Services</a>
-          <a href="/Updated/html/index.html#projects">Projects</a>
-          <a href="/Updated/html/index.html#about">About</a>
-          <a href="/Updated/html/contact.html">Contact</a>
+        <a href="/Updated/html/index.html#index">Home</a>
+        <a href="/Updated/html/index.html#services">Services</a>
+        <a href="/Updated/html/index.html#projects">Projects</a>
+        <a href="/Updated/html/index.html#about">About</a>
+        <a href="/Updated/html/contact.html">Contact</a>
       </div>
 
       <a href="/Updated/html/contact.html">
-          <button class="menu-toggle" id="menu-toggle">Get Quote</button>
+        <button class="menu-toggle" id="menu-toggle">Get Quote</button>
       </a>
 
       <!-- Mobile menu button (only shows on tablets/phones) -->
       <button type="button" class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
-          <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
       </button>
-  </nav>
+    </nav>
 
     <!-- Contact Section -->
     <main class="contact-section">
       <div class="contact-container">
-        
+
         <!-- Left Column: Info -->
         <div class="contact-info">
           <div class="section-subtitle">
@@ -45,7 +47,8 @@
           </div>
           <h1>Let’s Get In Touch</h1>
           <p class="description">
-            Have a renovation, fit-out, or construction project in mind? Let's discuss your vision, requirements, and goals and explore how we can bring them to life.
+            Have a renovation, fit-out, or construction project in mind? Let's discuss your vision, requirements, and
+            goals and explore how we can bring them to life.
           </p>
 
           <div class="company-details">
@@ -72,8 +75,9 @@
               <input type="email" name="email" placeholder="Email" aria-label="Email" required>
             </div>
             <div class="form-group">
-              <input type="tel" id="contact-number" name="phone" placeholder="Contact Number" aria-label="Contact Number"
-                     inputmode="numeric" pattern="[0-9]{7,15}" minlength="7" maxlength="15" autocomplete="tel" required>
+              <input type="tel" id="contact-number" name="phone" placeholder="Contact Number"
+                aria-label="Contact Number" inputmode="numeric" pattern="[0-9]{7,15}" minlength="7" maxlength="15"
+                autocomplete="tel" required>
             </div>
             <div class="form-group">
               <select name="service" aria-label="Service" required>
@@ -91,7 +95,7 @@
 
           <!-- Submission popups (shown by contact.js) -->
           <div id="popup-success" class="form-popup popup-success" role="dialog" aria-modal="true"
-               aria-labelledby="popup-success-title" aria-describedby="popup-success-text" hidden>
+            aria-labelledby="popup-success-title" aria-describedby="popup-success-text" hidden>
             <img src="/Updated/images/check.png" alt="" class="popup-icon">
             <h2 id="popup-success-title" class="popup-title">Submission Complete!</h2>
             <p id="popup-success-text" class="popup-text">Thanks for reaching out! Our team will be in touch soon.</p>
@@ -99,10 +103,11 @@
           </div>
 
           <div id="popup-failed" class="form-popup popup-failed" role="dialog" aria-modal="true"
-               aria-labelledby="popup-failed-title" aria-describedby="popup-failed-text" hidden>
+            aria-labelledby="popup-failed-title" aria-describedby="popup-failed-text" hidden>
             <img src="/Updated/images/error.png" alt="" class="popup-icon">
             <h2 id="popup-failed-title" class="popup-title">Submission Failed</h2>
-            <p id="popup-failed-text" class="popup-text">Something went wrong while submitting your inquiry. Please try again.</p>
+            <p id="popup-failed-text" class="popup-text">Something went wrong while submitting your inquiry. Please try
+              again.</p>
             <button type="button" class="popup-btn" data-popup-close>DONE</button>
           </div>
         </div>
@@ -114,4 +119,5 @@
   <script src="/Updated/js/nav.js"></script>
   <script src="/Updated/js/contact.js"></script>
 </body>
+
 </html>

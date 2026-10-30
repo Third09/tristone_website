@@ -1,121 +1,120 @@
-// Contact form: digits-only phone, validation, submit, success/failed popups.
-//
-// SETUP: get a free access key at https://web3forms.com (enter the company
-// email; submissions are sent there) and paste it below.
-// While the key is empty the form runs in DEMO mode: a valid form shows the
-// success popup but nothing is emailed. Fill the key in before going live.
-const WEB3FORMS_ACCESS_KEY = "";
-const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+// contact.js — sends the Tri-Stone contact form to Google Apps Script
+(function () {
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbyhOM-z6aTlpGJxKrzilQGESp7YLvnFMcEnwnNRKg7H8fxG8EmtEr7FPJtV3Tdxzbce7A/exec";
 
-document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
-  const phoneInput = document.getElementById("contact-number");
   const submitBtn = form.querySelector(".btn-submit");
+  const phoneInput = document.getElementById("contact-number");
   const popupSuccess = document.getElementById("popup-success");
   const popupFailed = document.getElementById("popup-failed");
-  let lastFocused = null;
+  const failedText = document.getElementById("popup-failed-text");
+  const defaultFailedMsg = failedText.textContent;
 
-  // --- Contact number: digits only (covers typing, pasting, autofill) ---
+  // Keep the phone field digits-only as the user types
   phoneInput.addEventListener("input", () => {
-    const digits = phoneInput.value.replace(/\D/g, "");
-    if (digits !== phoneInput.value) {
-      phoneInput.value = digits;
-    }
+    phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 15);
   });
 
-  // --- Popups ---
+  // ---------- Popups ----------
+  let lastFocused = null;
+
   function openPopup(popup) {
     lastFocused = document.activeElement;
     popup.hidden = false;
-    popup.querySelector("[data-popup-close]").focus();
+    document.body.classList.add("popup-open");
+    const btn = popup.querySelector("[data-popup-close]");
+    if (btn) btn.focus();
   }
 
-  function closePopup(popup) {
-    popup.hidden = true;
-    if (popup === popupFailed) {
-      // Send the user straight to the first field that needs fixing
-      const firstInvalid = form.querySelector('[aria-invalid="true"]');
-      (firstInvalid || lastFocused || submitBtn).focus();
-    } else if (lastFocused) {
-      lastFocused.focus();
-    }
+  function closePopups() {
+    [popupSuccess, popupFailed].forEach((p) => (p.hidden = true));
+    document.body.classList.remove("popup-open");
+    if (lastFocused) lastFocused.focus();
   }
 
-  [popupSuccess, popupFailed].forEach((popup) => {
-    popup.querySelector("[data-popup-close]").addEventListener("click", () => closePopup(popup));
-  });
+  document.querySelectorAll("[data-popup-close]").forEach((btn) =>
+    btn.addEventListener("click", closePopups)
+  );
 
   document.addEventListener("keydown", (e) => {
-    if (e.key !== "Escape") return;
-    [popupSuccess, popupFailed].forEach((popup) => {
-      if (!popup.hidden) closePopup(popup);
-    });
+    if (e.key === "Escape" && (!popupSuccess.hidden || !popupFailed.hidden)) {
+      closePopups();
+    }
   });
 
-  // --- Validation: mark every invalid field so it can be focused later ---
-  function validateForm() {
-    let valid = true;
-    form.querySelectorAll("input, select, textarea").forEach((field) => {
-      // Trim so a field containing only spaces counts as empty
-      if (field.tagName !== "SELECT" && field.value.trim() === "") {
-        field.value = "";
-      }
-      const ok = field.checkValidity();
-      field.setAttribute("aria-invalid", ok ? "false" : "true");
-      if (!ok) valid = false;
-    });
-    return valid;
+  function showFailed(message) {
+    failedText.textContent = message || defaultFailedMsg;
+    openPopup(popupFailed);
   }
 
-  // --- Sending ---
-  async function sendInquiry() {
-    if (!WEB3FORMS_ACCESS_KEY) {
-      console.warn("contact.js: no Web3Forms access key set, DEMO mode (nothing was sent).");
-      return true;
-    }
+  // ---------- Validation ----------
+  function validate() {
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const phone = form.phone.value.trim();
+    const service = form.service.value;
+    const message = form.message.value.trim();
 
-    const data = Object.fromEntries(new FormData(form));
-    data.access_key = WEB3FORMS_ACCESS_KEY;
-    data.subject = "New inquiry from the Tri-Stone website";
-    data.from_name = "Tri-Stone Website";
+    if (!name) return "Please enter your name.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Please enter a valid email address.";
+    if (!/^[0-9]{7,15}$/.test(phone)) return "Please enter a valid contact number (7–15 digits).";
+    if (!service) return "Please choose the service you're interested in.";
+    if (!message) return "Please enter a message.";
+    return null;
+  }
 
-    try {
-      const response = await fetch(WEB3FORMS_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(data),
-      });
-      return response.ok;
-    } catch (err) {
-      console.error("contact.js: submission error", err);
-      return false;
-    }
+  // ---------- Submit ----------
+  async function submitToGoogleScript(data) {
+    // Your script does JSON.parse(e.postData.contents), so send JSON.
+    // Content-Type text/plain keeps it a "simple" request, so the browser
+    // skips the CORS preflight that Apps Script can't answer.
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) throw new Error("HTTP " + response.status);
+
+    // Your script replies {"ok":true} or {"ok":false,"error":"..."}
+    const json = await response.json();
+    if (!json.ok) throw new Error(json.error || "Script reported an error");
   }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      openPopup(popupFailed);
+    const error = validate();
+    if (error) {
+      showFailed(error);
       return;
     }
 
-    // Prevent double submits while sending
-    submitBtn.disabled = true;
+    const data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      // Send the visible label ("Fit-out") rather than the value ("fit-out")
+      // so the email reads nicely
+      service: form.service.options[form.service.selectedIndex].text,
+      message: form.message.value.trim(),
+    };
+
     const originalLabel = submitBtn.textContent;
+    submitBtn.disabled = true;
     submitBtn.textContent = "SENDING...";
 
-    const sent = await sendInquiry();
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalLabel;
-
-    if (sent) {
+    try {
+      await submitToGoogleScript(data);
       form.reset();
-      form.querySelectorAll("[aria-invalid]").forEach((f) => f.removeAttribute("aria-invalid"));
       openPopup(popupSuccess);
-    } else {
-      openPopup(popupFailed);
+    } catch (err) {
+      console.error("Contact form submission failed:", err);
+      showFailed();
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
     }
   });
-});
+})();
