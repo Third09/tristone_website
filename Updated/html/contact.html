@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - Tri-Stone Construction</title>
   <link rel="stylesheet" href="/Updated/css/contact.css">
 </head>
+
 <body>
 
   <div class="page-wrapper">
     <!-- Navigation Bar -->
-  <nav class="site-header nav-hidden">
-      <a href="#index">
-          <img src="/Updated/images/tristone logo white.png" alt="Tri-Stone Logo">
+    <nav class="site-header nav-hidden">
+      <a href="/Updated/html/index.html#index">
+        <img src="/Updated/images/tristone logo white.png" alt="Tri-Stone Logo">
       </a>
-      
-      <div class="nav-links">
-          <a href="/Updated/html/index.html">Home</a>
-          <a href="/Updated/html/index.html">Services</a>
-          <a href="/Updated/html/index.html">Projects</a>
-          <a href="/Updated/html/index.html">About</a>
-          <a href="/Updated/html/contact.html">Contact</a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="/Updated/html/index.html#index">Home</a>
+        <a href="/Updated/html/index.html#services">Services</a>
+        <a href="/Updated/html/index.html#projects">Projects</a>
+        <a href="/Updated/html/index.html#about">About</a>
+        <a href="/Updated/html/contact.html">Contact</a>
       </div>
 
       <a href="/Updated/html/contact.html">
-          <button class="menu-toggle" id="menu-toggle">Get Quote</button>
+        <button class="menu-toggle" id="menu-toggle">Get Quote</button>
       </a>
-  </nav>
+
+      <!-- Mobile menu button (only shows on tablets/phones) -->
+      <button type="button" class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
 
     <!-- Contact Section -->
     <main class="contact-section">
       <div class="contact-container">
-        
+
         <!-- Left Column: Info -->
         <div class="contact-info">
           <div class="section-subtitle">
@@ -40,7 +47,8 @@
           </div>
           <h1>Let’s Get In Touch</h1>
           <p class="description">
-            Have a renovation, fit-out, or construction project in mind? Let's discuss your vision, requirements, and goals and explore how we can bring them to life.
+            Have a renovation, fit-out, or construction project in mind? Let's discuss your vision, requirements, and
+            goals and explore how we can bring them to life.
           </p>
 
           <div class="company-details">
@@ -59,18 +67,20 @@
 
         <!-- Right Column: Form Card -->
         <div class="contact-form-card">
-          <form action="#" method="POST">
+          <form id="contact-form" action="#" method="POST" novalidate>
             <div class="form-group">
-              <input type="text" placeholder="Name" required>
+              <input type="text" name="name" placeholder="Name" aria-label="Name" required>
             </div>
             <div class="form-group">
-              <input type="email" placeholder="Email" required>
+              <input type="email" name="email" placeholder="Email" aria-label="Email" required>
             </div>
             <div class="form-group">
-              <input type="tel" placeholder="Contact Number" required>
+              <input type="tel" id="contact-number" name="phone" placeholder="Contact Number"
+                aria-label="Contact Number" inputmode="numeric" pattern="[0-9]{11}" minlength="11" maxlength="11"
+                autocomplete="tel" required>
             </div>
             <div class="form-group">
-              <select required>
+              <select name="service" aria-label="Service" required>
                 <option value="" disabled selected>What service are you interested in</option>
                 <option value="renovation">Renovation</option>
                 <option value="fit-out">Fit-out</option>
@@ -78,15 +88,36 @@
               </select>
             </div>
             <div class="form-group">
-              <textarea placeholder="Message" rows="5" required></textarea>
+              <textarea name="message" placeholder="Message" aria-label="Message" rows="5" required></textarea>
             </div>
             <button type="submit" class="btn-submit">SUBMIT</button>
           </form>
+
+          <!-- Submission popups (shown by contact.js) -->
+          <div id="popup-success" class="form-popup popup-success" role="dialog" aria-modal="true"
+            aria-labelledby="popup-success-title" aria-describedby="popup-success-text" hidden>
+            <img src="/Updated/images/check.png" alt="" class="popup-icon">
+            <h2 id="popup-success-title" class="popup-title">Submission Complete!</h2>
+            <p id="popup-success-text" class="popup-text">Thanks for reaching out! Our team will be in touch soon.</p>
+            <button type="button" class="popup-btn" data-popup-close>DONE</button>
+          </div>
+
+          <div id="popup-failed" class="form-popup popup-failed" role="dialog" aria-modal="true"
+            aria-labelledby="popup-failed-title" aria-describedby="popup-failed-text" hidden>
+            <img src="/Updated/images/error.png" alt="" class="popup-icon">
+            <h2 id="popup-failed-title" class="popup-title">Submission Failed</h2>
+            <p id="popup-failed-text" class="popup-text">Something went wrong while submitting your inquiry. Please try
+              again.</p>
+            <button type="button" class="popup-btn" data-popup-close>DONE</button>
+          </div>
         </div>
 
       </div>
     </main>
   </div>
 
+  <script src="/Updated/js/nav.js"></script>
+  <script src="/Updated/js/contact.js"></script>
 </body>
+
 </html>

@@ -5,17 +5,6 @@ const galleryData = {
         { url: "https://picsum.photos/id/15/800/450", title: "Water Waterfall" },
         { url: "https://picsum.photos/id/29/800/450", title: "Misty Mountains" },
         { url: "https://picsum.photos/id/54/800/450", title: "Green Valley" }
-    ],
-    architecture: [
-        { url: "https://picsum.photos/id/122/800/450", title: "Modern Building" },
-        { url: "https://picsum.photos/id/142/800/450", title: "Classic Architecture" },
-        { url: "https://picsum.photos/id/160/800/450", title: "City Bridge" }
-    ],
-    travel: [
-        { url: "https://picsum.photos/id/237/800/450", title: "Puppy on Trip" },
-        { url: "https://picsum.photos/id/249/800/450", title: "Roadtrip View" },
-        { url: "https://picsum.photos/id/250/800/450", title: "Camera & Map" },
-        { url: "https://picsum.photos/id/274/800/450", title: "Sunny Beach" }
     ]
 };
 
@@ -37,6 +26,11 @@ function initGallery() {
 
 // Load a specific group/category
 function loadCategory(categoryKey) {
+    // Ignore dropdown options that have no photos in galleryData
+    if (!galleryData[categoryKey] || galleryData[categoryKey].length === 0) {
+        console.warn("gallery.js: no photos for group \"" + categoryKey + "\"");
+        return;
+    }
     currentCategory = categoryKey;
     currentIndex = 0;
     updateDisplay();
@@ -47,18 +41,33 @@ function updateDisplay() {
     const images = galleryData[currentCategory];
     const currentItem = images[currentIndex];
 
-    // Update main viewer
-    mainImage.src = currentItem.url;
+    // Update main viewer (with a quick fade so the change feels smooth)
+    if (mainImage.getAttribute("src") !== currentItem.url) {
+        mainImage.src = currentItem.url;
+        mainImage.alt = currentItem.title;
+        mainImage.animate([{ opacity: 0.2 }, { opacity: 1 }], { duration: 350, easing: "ease-out" });
+    }
     imageTitle.textContent = currentItem.title;
 
-    // Render thumbnails
+    // Render thumbnails (remember keyboard focus so it isn't lost on redraw)
+    const hadFocus = thumbnailStrip.contains(document.activeElement);
     thumbnailStrip.innerHTML = "";
     images.forEach((imgObj, index) => {
-        const thumb = document.createElement("img");
-        thumb.src = imgObj.url;
-        thumb.alt = imgObj.title;
+        // A button (not a bare img) so thumbnails also work with the keyboard
+        const thumb = document.createElement("button");
+        thumb.type = "button";
+        thumb.className = "thumb-btn";
+        thumb.setAttribute("aria-label", "Show " + imgObj.title);
+
+        const img = document.createElement("img");
+        img.src = imgObj.url;
+        img.alt = "";
+        img.loading = "lazy";
+        thumb.appendChild(img);
+
         if (index === currentIndex) {
             thumb.classList.add("active");
+            thumb.setAttribute("aria-current", "true");
         }
         thumb.addEventListener("click", () => {
             currentIndex = index;
@@ -66,6 +75,10 @@ function updateDisplay() {
         });
         thumbnailStrip.appendChild(thumb);
     });
+
+    if (hadFocus) {
+        thumbnailStrip.children[currentIndex].focus();
+    }
 }
 
 // Event Listeners for Next / Prev buttons

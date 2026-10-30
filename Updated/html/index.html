@@ -13,7 +13,7 @@
           <img src="/Updated/images/tristone logo white.png" alt="Tri-Stone Logo">
       </a>
       
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
           <a href="#index">Home</a>
           <a href="#services">Services</a>
           <a href="#projects">Projects</a>
@@ -24,6 +24,11 @@
       <a href="/Updated/html/contact.html">
           <button class="menu-toggle" id="menu-toggle">Get Quote</button>
       </a>
+
+      <!-- Mobile menu button (only shows on tablets/phones) -->
+      <button type="button" class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+      </button>
   </nav>
 
   <!-- Intro Video & Image Container -->
@@ -75,13 +80,18 @@
         </p>
         </div>
 
-        <div class="cards">
+        <div class="cards-carousel">
+        <button type="button" class="carousel-arrow carousel-arrow-prev" id="cards-prev" aria-label="Previous service" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+
+        <div class="cards" id="cards-track">
 
             <div class="card">
                 <div class="card-top">
                     <span class="card-number">01.</span>
                     <!-- Replace src with your actual icon path -->
-                    <img src="Updated/images/icon-ruler.png" alt="Ruler Icon" class="card-icon">
+                    <img src="/Updated/images/icon-ruler.svg" alt="" class="card-icon">
                 </div>
 
                 <h3 class="card-title">Residential<br>Construction</h3>
@@ -95,7 +105,7 @@
             <div class="card card-bordered">
                 <div class="card-top">
                     <span class="card-number">02.</span>
-                    <img src="Updated/images/icon-helmet.png" alt="Helmet Icon" class="card-icon">
+                    <img src="/Updated/images/icon-helmet.svg" alt="" class="card-icon">
                 </div>
                 <h3 class="card-title">Commercial<br>Construction</h3>
                 <p class="card-desc">Quality residential construction from planning to completion, delivering durable spaces crafted around your needs.</p>
@@ -108,7 +118,7 @@
             <div class="card">
                 <div class="card-top">
                     <span class="card-number">03.</span>
-                    <img src="Updated/images/icon-tools.png" alt="Tools Icon" class="card-icon">
+                    <img src="/Updated/images/icon-tools.svg" alt="" class="card-icon">
                 </div>
 
                 <h3 class="card-title">Repairs And Home<br>Extension</h3>
@@ -120,21 +130,13 @@
                 </div>
 
 
-                 <div class="card">
-                    <div class="card-top">
-                        <span class="card-number">03.</span>
-                        <img src="Updated/images/icon-tools.png" alt="Tools Icon" class="card-icon">
-                    </div>
-
-                    <h3 class="card-title">Repairs And Home<br>Extension</h3>
-                    <p class="card-desc">Quality residential construction from planning to completion, delivering durable spaces crafted around your needs.</p>
-                    <div class="card-img-wrapper">
-                        <img src="/Updated/images/image 59.png" alt="Roof Repair">
-                    </div>
-                    <a href="#contact" class="card-btn">INQUIRE NOW</a>
-                </div>
 
             
+        </div>
+
+        <button type="button" class="carousel-arrow carousel-arrow-next" id="cards-next" aria-label="Next service">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
         </div>
 
 </div>
@@ -151,8 +153,6 @@
         <label for="category-select">Select Group:</label>
         <select id="category-select">
             <option value="nature">Nature</option>
-            <option value="architecture">Architecture</option>
-            <option value="travel">Travel</option>
         </select>
     </div>
   
@@ -265,7 +265,9 @@
 
 
 
+    <script src="/Updated/js/nav.js"></script>
     <script src="/Updated/js/intro.js"></script>
     <script src="/Updated/js/gallery.js"></script>
+    <script src="/Updated/js/services-carousel.js"></script>
 </body>
 </html>
