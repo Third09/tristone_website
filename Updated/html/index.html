@@ -18,10 +18,10 @@
           <a href="#services">Services</a>
           <a href="#projects">Projects</a>
           <a href="#about">About</a>
-          <a href="/Updated/html/contact.html">Contact</a>
+          <a href="#contact">Contact</a>
       </div>
 
-      <a href="/Updated/html/contact.html">
+      <a href="#contact">
           <button class="menu-toggle" id="menu-toggle">Get Quote</button>
       </a>
 
@@ -81,10 +81,6 @@
         </div>
 
         <div class="cards-carousel">
-        <button type="button" class="carousel-arrow carousel-arrow-prev" id="cards-prev" aria-label="Previous service" hidden>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-        </button>
-
         <div class="cards" id="cards-track">
 
             <div class="card">
@@ -134,50 +130,45 @@
             
         </div>
 
-        <button type="button" class="carousel-arrow carousel-arrow-next" id="cards-next" aria-label="Next service">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-        </button>
         </div>
 
 </div>
 
 <div id="projects" class="container2 projects-section">
-  
-  <!-- 1. Header Section matching the image -->
+
+  <!-- Header: label, title, featured project, project picker -->
   <div class="projects-header-wrapper">
     <div class="projhead">
       <p class="line"></p> <span>COMPANY SERVICES</span>
     </div>
     <h1 class="projects-main-title">What We Build</h1>
+    <p id="project-subtitle" class="projects-subtitle"></p>
     <div class="gallery-controls">
-        <label for="category-select">Select Group:</label>
-        <select id="category-select">
-            <option value="nature">Nature</option>
-        </select>
+        <label for="category-select" class="visually-hidden">Choose a project</label>
+        <!-- Options are filled in by gallery.js from galleryData -->
+        <select id="category-select" class="projects-dropdown"></select>
     </div>
-  
+  </div>
 
+  <!-- Gallery: previous | current (big) | next, then caption and thumbnails -->
+  <div class="gallery-container">
+      <div class="main-viewer" id="slide-track">
+          <!-- Square slides are added by gallery.js -->
+          <button type="button" id="prev-btn" class="nav-arrow left-arrow" aria-label="Previous photo">
+              <svg viewBox="0 0 24 48" aria-hidden="true"><path d="M20 4 4 24l16 20"/></svg>
+          </button>
+          <button type="button" id="next-btn" class="nav-arrow right-arrow" aria-label="Next photo">
+              <svg viewBox="0 0 24 48" aria-hidden="true"><path d="M4 4l16 20L4 44"/></svg>
+          </button>
+      </div>
 
- <!-- Category Dropdown Selector -->
-    
+      <div class="gallery-below">
+          <p id="image-title" class="image-title" aria-live="polite"></p>
+          <!-- Thumbnails are added by gallery.js -->
+          <div id="thumbnail-strip" class="thumbnail-strip"></div>
+      </div>
+  </div>
 
-    <!-- Gallery Container -->
-    <div class="gallery-container">
-        <!-- Main Large Image Viewer with Arrow Buttons -->
-        <div class="main-viewer">
-            <button id="prev-btn" class="nav-arrow left-arrow">&#10094;</button>
-            <img id="main-image" src="" alt="Main Gallery Image">
-            <button id="next-btn" class="nav-arrow right-arrow">&#10095;</button>
-            <div id="image-title" class="image-title"></div>
-        </div>
-
-        <!-- Thumbnail Filmstrip Below -->
-        <div id="thumbnail-strip" class="thumbnail-strip">
-            <!-- Thumbnails will be injected dynamically via JS -->
-        </div>
-    </div>
-
-</div>
 </div>
 <section id="about" class="aboutus-header-section">
     <div class="aboutus-title-container">
@@ -247,6 +238,88 @@
 
   </section>
 
+<!-- ===================== CONTACT (moved in from contact.html) ===================== -->
+<section id="contact" class="contact-page">
+    <div class="contact-section">
+      <div class="contact-container">
+
+        <!-- Left Column: Info -->
+        <div class="contact-info">
+          <div class="section-subtitle">
+            <span class="line"></span>
+            <span class="subtitle-text">CONTACT US</span>
+          </div>
+          <h1>Let’s Get In Touch</h1>
+          <p class="description">
+            Have a renovation, fit-out, or construction project in mind? Let's discuss your vision, requirements, and
+            goals and explore how we can bring them to life.
+          </p>
+
+          <div class="company-details">
+            <h3>Tri-stone Construction</h3>
+            <p class="phone">0969-1806929</p>
+            <p class="address">
+              96, Maligaya St. Ibayo II Bagbag Novaliches<br>
+              Quezon City
+            </p>
+            <p class="socials">
+              tristoneconstructionserv@gmail.com<br>
+              Facebook.com/TristoneConstruction
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Column: Form Card -->
+        <div class="contact-form-card">
+          <form id="contact-form" action="#" method="POST" novalidate>
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Name" aria-label="Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Email" aria-label="Email" required>
+            </div>
+            <div class="form-group">
+              <input type="tel" id="contact-number" name="phone" placeholder="Contact Number"
+                aria-label="Contact Number" inputmode="numeric" pattern="[0-9]{11}" minlength="11" maxlength="11"
+                autocomplete="tel" required>
+            </div>
+            <div class="form-group">
+              <select name="service" aria-label="Service" required>
+                <option value="" disabled selected>What service are you interested in</option>
+                <option value="renovation">Renovation</option>
+                <option value="fit-out">Fit-out</option>
+                <option value="construction">Construction</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea name="message" placeholder="Message" aria-label="Message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">SUBMIT</button>
+          </form>
+
+          <!-- Submission popups (shown by contact.js) -->
+          <div id="popup-success" class="form-popup popup-success" role="dialog" aria-modal="true"
+            aria-labelledby="popup-success-title" aria-describedby="popup-success-text" hidden>
+            <img src="/Updated/images/check.png" alt="" class="popup-icon">
+            <h2 id="popup-success-title" class="popup-title">Submission Complete!</h2>
+            <p id="popup-success-text" class="popup-text">Thanks for reaching out! Our team will be in touch soon.</p>
+            <button type="button" class="popup-btn" data-popup-close>DONE</button>
+          </div>
+
+          <div id="popup-failed" class="form-popup popup-failed" role="dialog" aria-modal="true"
+            aria-labelledby="popup-failed-title" aria-describedby="popup-failed-text" hidden>
+            <img src="/Updated/images/error.png" alt="" class="popup-icon">
+            <h2 id="popup-failed-title" class="popup-title">Submission Failed</h2>
+            <p id="popup-failed-text" class="popup-text">Something went wrong while submitting your inquiry. Please try
+              again.</p>
+            <button type="button" class="popup-btn" data-popup-close>DONE</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</section>
+
 <br>
   <div class="footer">
   <footer class="site-footer">
@@ -268,6 +341,6 @@
     <script src="/Updated/js/nav.js"></script>
     <script src="/Updated/js/intro.js"></script>
     <script src="/Updated/js/gallery.js"></script>
-    <script src="/Updated/js/services-carousel.js"></script>
+    <script src="/Updated/js/contact.js"></script>
 </body>
 </html>
