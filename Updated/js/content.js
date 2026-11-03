@@ -11,10 +11,18 @@
 (function () {
   "use strict";
 
+  // Each service card picks one of these looks in Website Admin ("icon"):
+  // its icon, and the picture shown when the card has no picture of its own.
   const SERVICE_LOOK = {
-    "Residential Construction": { icon: "/Updated/images/icon-ruler.svg", image: "/Updated/images/Residential.jpg" },
-    "Commercial Construction": { icon: "/Updated/images/icon-helmet.svg", image: "/Updated/images/commercial.jpg" },
-    "Repairs and Home Extension": { icon: "/Updated/images/icon-tools.svg", image: "/Updated/images/repairs.jpg" }
+    ruler: { icon: "/Updated/images/icon-ruler.svg", image: "/Updated/images/Residential.jpg" },
+    helmet: { icon: "/Updated/images/icon-helmet.svg", image: "/Updated/images/commercial.jpg" },
+    tools: { icon: "/Updated/images/icon-tools.svg", image: "/Updated/images/repairs.jpg" }
+  };
+  // Content published before icons existed: the 3 original services
+  const LOOK_BY_NAME = {
+    "Residential Construction": "ruler",
+    "Commercial Construction": "helmet",
+    "Repairs and Home Extension": "tools"
   };
   const ABOUT_IMAGE = "/Updated/images/image 40.jpg";
 
@@ -79,7 +87,7 @@
     if (!track) return;
     track.innerHTML = "";
     services.forEach((s, i) => {
-      const look = SERVICE_LOOK[s.name] || {};
+      const look = SERVICE_LOOK[s.icon] || SERVICE_LOOK[LOOK_BY_NAME[s.name]] || SERVICE_LOOK.ruler;
       const card = el("div", i % 2 === 1 ? "card card-bordered" : "card");
 
       const top = el("div", "card-top");
