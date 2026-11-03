@@ -81,8 +81,9 @@
     }
   }
 
-  // ---- Services cards ----
+  // ---- Services cards (and the Contact form's service list) ----
   function fillServices(services) {
+    fillServiceChoices(services);
     const track = document.getElementById("cards-track");
     if (!track) return;
     track.innerHTML = "";
@@ -116,6 +117,23 @@
       card.appendChild(btn);
       track.appendChild(card);
     });
+  }
+
+  // The Contact form lists the published services (each name once) plus "Other"
+  function fillServiceChoices(services) {
+    const select = document.querySelector("#contact-form select[name=service]");
+    if (!select) return;
+    const names = [...new Set(services.map((s) => s.name).filter(Boolean))];
+    if (names.length === 0) return;
+    const placeholder = select.querySelector("option[value='']");
+    select.innerHTML = "";
+    if (placeholder) select.appendChild(placeholder);
+    names.concat(["Other"]).forEach((name) => {
+      const option = el("option", null, name);
+      option.value = name;
+      select.appendChild(option);
+    });
+    if (placeholder) select.value = "";
   }
 
   // ---- Projects gallery (uses gallery.js) ----

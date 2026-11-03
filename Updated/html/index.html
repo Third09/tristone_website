@@ -286,10 +286,16 @@
             <div class="form-group">
               <select name="service" aria-label="Service" required>
                 <option value="" disabled selected>What service are you interested in</option>
-                <option value="renovation">Renovation</option>
-                <option value="fit-out">Fit-out</option>
-                <option value="construction">Construction</option>
+                <!-- Filled from the services published in Website Admin (content.js); these are the fallback -->
+                <option value="Residential Construction">Residential Construction</option>
+                <option value="Commercial Construction">Commercial Construction</option>
+                <option value="Repairs and Home Extension">Repairs and Home Extension</option>
+                <option value="Other">Other</option>
               </select>
+            </div>
+            <div class="form-group">
+              <input type="text" name="location" placeholder="Project Location (optional)" aria-label="Project Location"
+                maxlength="255" autocomplete="address-level2">
             </div>
             <div class="form-group">
               <textarea name="message" placeholder="Message" aria-label="Message" rows="5" required></textarea>

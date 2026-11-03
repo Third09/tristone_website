@@ -3,6 +3,17 @@
   const SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbyhOM-z6aTlpGJxKrzilQGESp7YLvnFMcEnwnNRKg7H8fxG8EmtEr7FPJtV3Tdxzbce7A/exec";
 
+  // ---------- Visit counter (Website Admin > Contact Us > Website Visits) ----------
+  // One count per visitor per browser session; only the date and the page are sent, nothing personal.
+  // Not counted on local tests or in Website Admin's Preview Website.
+  try {
+    const testing = ["localhost", "127.0.0.1", "tristone.preview"].includes(location.hostname);
+    if (!testing && !sessionStorage.getItem("tristoneVisitCounted") && navigator.sendBeacon) {
+      sessionStorage.setItem("tristoneVisitCounted", "1");
+      navigator.sendBeacon(SCRIPT_URL, JSON.stringify({ action: "visit", page: location.pathname }));
+    }
+  } catch (e) { /* storage blocked: skip counting */ }
+
   const form = document.getElementById("contact-form");
   const submitBtn = form.querySelector(".btn-submit");
   const phoneInput = document.getElementById("contact-number");
@@ -98,6 +109,7 @@
       // Send the visible label ("Fit-out") rather than the value ("fit-out")
       // so the email reads nicely
       service: form.service.options[form.service.selectedIndex].text,
+      location: form.location ? form.location.value.trim() : "",
       message: form.message.value.trim(),
     };
 
