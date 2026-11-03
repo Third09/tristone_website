@@ -87,7 +87,9 @@
     if (!track) return;
     track.innerHTML = "";
     services.forEach((s, i) => {
-      const look = SERVICE_LOOK[s.icon] || SERVICE_LOOK[LOOK_BY_NAME[s.name]] || SERVICE_LOOK.ruler;
+      // Newer content says where its icon is (icon_url) and already puts the right website picture in image
+      const look = s.icon_url ? { icon: s.icon_url, image: "" }
+        : SERVICE_LOOK[s.icon] || SERVICE_LOOK[LOOK_BY_NAME[s.name]] || SERVICE_LOOK.ruler;
       const card = el("div", i % 2 === 1 ? "card card-bordered" : "card");
 
       const top = el("div", "card-top");
