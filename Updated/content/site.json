@@ -1,5 +1,5 @@
 {
-  "published_at": "2026-11-08 17:10",
+  "published_at": "2026-11-08 17:27",
   "home": {
     "headline": "QUALITY CONSTRUCTION BUILT AROUND YOUR NEEDS",
     "subheadline": "Professional construction, renovation, and improvement services in the Philippines, delivering reliable workmanship and practical solutions for every project.",
@@ -34,8 +34,8 @@
       "image": "/Updated/images/repairs.jpg"
     },
     {
-      "name": "electrical",
-      "description": "wqerwqerqwerqwer",
+      "name": "Electrical Works",
+      "description": "We can do your electrical works for you, lining, bulb fitting, even uncommon light fixtures,",
       "icon": "bolt",
       "icon_url": "/Updated/images/service-icons/bolt.svg",
       "image": "/Updated/images/repairs.jpg"
@@ -77,13 +77,6 @@
       "text": "To be a responsible building constructor, delivering growth to our community beyond expectation.",
       "second_heading": "OUR MISSION",
       "second_text": "We will strive to implement a long-term relationship with our client, based on quality, timely service, safety and anticipation of their needs. Dedication to providing quality construction services.",
-      "image": null
-    },
-    {
-      "heading": "sdfghjk",
-      "text": "qwedfgtyuh6t8g",
-      "second_heading": null,
-      "second_text": null,
       "image": null
     }
   ]
