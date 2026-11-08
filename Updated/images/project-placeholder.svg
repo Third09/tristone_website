@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Photos coming soon">
+  <!-- Shown by content.js for a published project that has no photos yet (Tri-Stone, 2026-11-08). -->
+  <defs>
+    <pattern id="stripes" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="28" height="28" fill="#f4f5f7"/>
+      <rect width="14" height="28" fill="#eef0f3"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="800" fill="url(#stripes)"/>
+  <g fill="none" stroke="#f47a20" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(400 330)">
+    <!-- a small house under construction -->
+    <path d="M-150 20 L0 -110 L150 20"/>
+    <path d="M-110 -15 V130 H110 V-15"/>
+    <path d="M-40 130 V60 H40 V130"/>
+    <path d="M85 -55 V-120 H120 V-25"/>
+  </g>
+  <text x="400" y="560" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="46" font-weight="700" fill="#1d2939">Photos coming soon</text>
+  <text x="400" y="615" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#667085">Tri-Stone Construction Services</text>
+</svg>

@@ -137,8 +137,11 @@
   }
 
   // ---- Projects gallery (uses gallery.js) ----
+  // A project without photos yet still shows, with a "Photos coming soon" picture (owner request 2026-11-08).
+  const PROJECT_PLACEHOLDER = "/Updated/images/project-placeholder.svg";
+
   function fillProjects(projects) {
-    const shown = projects.filter((p) => p.photos && p.photos.length > 0);
+    const shown = projects.map((p) => p.photos && p.photos.length > 0 ? p : Object.assign({}, p, { photos: [PROJECT_PLACEHOLDER] }));
     const section = document.getElementById("projects");
     if (shown.length === 0) {
       if (section) section.hidden = true;   // nothing to show
