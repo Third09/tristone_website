@@ -1,0 +1,90 @@
+{
+  "published_at": "2026-11-08 17:10",
+  "home": {
+    "headline": "QUALITY CONSTRUCTION BUILT AROUND YOUR NEEDS",
+    "subheadline": "Professional construction, renovation, and improvement services in the Philippines, delivering reliable workmanship and practical solutions for every project.",
+    "image": null
+  },
+  "contact": {
+    "address": "96, Maligaya St. Ibayo II Bagbag Novaliches Quezon City, Philippines",
+    "phone": "0969-180-6929",
+    "email": "tristoneconstructionservices@gmail.com",
+    "copyright": "Copyright 2026 Tristone Construction - All Rights Reserved."
+  },
+  "services": [
+    {
+      "name": "Residential Construction",
+      "description": "Quality residential construction from planning to completion.",
+      "icon": "ruler",
+      "icon_url": "/Updated/images/icon-ruler.svg",
+      "image": "/Updated/images/Residential.jpg"
+    },
+    {
+      "name": "Commercial Construction",
+      "description": "Quality commercial construction from planning to completion.",
+      "icon": "helmet",
+      "icon_url": "/Updated/images/icon-helmet.svg",
+      "image": "/Updated/images/commercial.jpg"
+    },
+    {
+      "name": "Repairs and Home Extension",
+      "description": "Repairs and home extensions done right.",
+      "icon": "tools",
+      "icon_url": "/Updated/images/icon-tools.svg",
+      "image": "/Updated/images/repairs.jpg"
+    },
+    {
+      "name": "electrical",
+      "description": "wqerwqerqwerqwer",
+      "icon": "bolt",
+      "icon_url": "/Updated/images/service-icons/bolt.svg",
+      "image": "/Updated/images/repairs.jpg"
+    }
+  ],
+  "projects": [
+    {
+      "title": "12312312",
+      "location": "123",
+      "category": "Residential",
+      "description": "weuqyrgbasjhdbfasdf",
+      "photos": []
+    },
+    {
+      "title": "Aster Residences",
+      "location": "San Juan City",
+      "category": "Repairs / Renovations",
+      "description": "Refined interiors with a fresh, contemporary feel.",
+      "photos": []
+    }
+  ],
+  "about": [
+    {
+      "heading": "ABOUT TRI-STONE",
+      "text": "Tri-stone construction services takes on the role of main constructor for small to medium size project. Providing a quality construction services includes a new construction, renovation, remodels, repairs, exterior / interior fit-outs, and residential houses.\n\nIn particular we enjoy working with our clients and other members of project teams, to provide individual and innovative cost solution to each project brief.",
+      "second_heading": null,
+      "second_text": null,
+      "image": null
+    },
+    {
+      "heading": "Our Principles",
+      "text": "In the pursuit of this goals, we place God above all. And we shall be guided by principles of teamwork, Integrity, discipline, excellence and safety.",
+      "second_heading": null,
+      "second_text": null,
+      "image": null
+    },
+    {
+      "heading": "OUR VISION",
+      "text": "To be a responsible building constructor, delivering growth to our community beyond expectation.",
+      "second_heading": "OUR MISSION",
+      "second_text": "We will strive to implement a long-term relationship with our client, based on quality, timely service, safety and anticipation of their needs. Dedication to providing quality construction services.",
+      "image": null
+    },
+    {
+      "heading": "sdfghjk",
+      "text": "qwedfgtyuh6t8g",
+      "second_heading": null,
+      "second_text": null,
+      "image": null
+    }
+  ]
+}
