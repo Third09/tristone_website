@@ -53,7 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Skip the intro if it already played this session, or if the visitor came
   // from another page's nav link (e.g. contact.html -> index.html#services)
-  if (hasSeenIntro() || window.location.hash) {
+  // Phones skip the intro video (owner request 2026-11-08): it is slow on mobile data.
+  const isPhone = window.matchMedia("(max-width: 768px)").matches;
+
+  if (hasSeenIntro() || window.location.hash || isPhone) {
     // Stop the video from downloading/playing in the background
     video.removeAttribute("autoplay");
     video.querySelectorAll("source").forEach((source) => source.remove());
