@@ -1,5 +1,5 @@
 {
-  "published_at": "2026-11-08 17:27",
+  "published_at": "2026-11-09 15:17",
   "home": {
     "headline": "QUALITY CONSTRUCTION BUILT AROUND YOUR NEEDS",
     "subheadline": "Professional construction, renovation, and improvement services in the Philippines, delivering reliable workmanship and practical solutions for every project.",
@@ -39,6 +39,13 @@
       "icon": "bolt",
       "icon_url": "/Updated/images/service-icons/bolt.svg",
       "image": "/Updated/images/repairs.jpg"
+    },
+    {
+      "name": "testing service",
+      "description": "testing one oneonne",
+      "icon": "wall",
+      "icon_url": "/Updated/images/service-icons/wall.svg",
+      "image": "/Updated/images/Residential.jpg"
     }
   ],
   "projects": [
