@@ -1,90 +1,83 @@
 {
-  "published_at": "2026-11-09 15:17",
   "home": {
+    "image": null,
     "headline": "QUALITY CONSTRUCTION BUILT AROUND YOUR NEEDS",
-    "subheadline": "Professional construction, renovation, and improvement services in the Philippines, delivering reliable workmanship and practical solutions for every project.",
-    "image": null
+    "subheadline": "Professional construction, renovation, and improvement services in the Philippines, delivering reliable workmanship and practical solutions for every project."
   },
-  "contact": {
-    "address": "96, Maligaya St. Ibayo II Bagbag Novaliches Quezon City, Philippines",
-    "phone": "0969-180-6929",
-    "email": "tristoneconstructionservices@gmail.com",
-    "copyright": "Copyright 2026 Tristone Construction - All Rights Reserved."
-  },
-  "services": [
+  "about": [
     {
-      "name": "Residential Construction",
-      "description": "Quality residential construction from planning to completion.",
-      "icon": "ruler",
-      "icon_url": "/Updated/images/icon-ruler.svg",
-      "image": "/Updated/images/Residential.jpg"
+      "text": "Tri-stone construction services takes on the role of main constructor for small to medium size project. Providing a quality construction services includes a new construction, renovation, remodels, repairs, exterior / interior fit-outs, and residential houses.\n\nIn particular we enjoy working with our clients and other members of project teams, to provide individual and innovative cost solution to each project brief.",
+      "image": null,
+      "heading": "ABOUT TRI-STONE",
+      "second_text": null,
+      "second_heading": null
     },
     {
-      "name": "Commercial Construction",
-      "description": "Quality commercial construction from planning to completion.",
-      "icon": "helmet",
-      "icon_url": "/Updated/images/icon-helmet.svg",
-      "image": "/Updated/images/commercial.jpg"
+      "text": "In the pursuit of this goals, we place God above all. And we shall be guided by principles of teamwork, Integrity, discipline, excellence and safety.",
+      "image": null,
+      "heading": "Our Principles",
+      "second_text": null,
+      "second_heading": null
     },
     {
-      "name": "Repairs and Home Extension",
-      "description": "Repairs and home extensions done right.",
-      "icon": "tools",
-      "icon_url": "/Updated/images/icon-tools.svg",
-      "image": "/Updated/images/repairs.jpg"
-    },
-    {
-      "name": "Electrical Works",
-      "description": "We can do your electrical works for you, lining, bulb fitting, even uncommon light fixtures,",
-      "icon": "bolt",
-      "icon_url": "/Updated/images/service-icons/bolt.svg",
-      "image": "/Updated/images/repairs.jpg"
-    },
-    {
-      "name": "testing service",
-      "description": "testing one oneonne",
-      "icon": "wall",
-      "icon_url": "/Updated/images/service-icons/wall.svg",
-      "image": "/Updated/images/Residential.jpg"
+      "text": "To be a responsible building constructor, delivering growth to our community beyond expectation.",
+      "image": null,
+      "heading": "OUR VISION",
+      "second_text": "We will strive to implement a long-term relationship with our client, based on quality, timely service, safety and anticipation of their needs. Dedication to providing quality construction services.",
+      "second_heading": "OUR MISSION"
     }
   ],
+  "contact": {
+    "email": "tristoneconstructionservices@gmail.com",
+    "phone": "0969-180-6929",
+    "address": "96, Maligaya St. Ibayo II Bagbag Novaliches Quezon City, Philippines",
+    "copyright": "Copyright 2026 Tristone Construction - All Rights Reserved."
+  },
   "projects": [
     {
       "title": "12312312",
-      "location": "123",
+      "photos": [],
       "category": "Residential",
-      "description": "weuqyrgbasjhdbfasdf",
-      "photos": []
+      "location": "123",
+      "description": "weuqyrgbasjhdbfasdf"
     },
     {
       "title": "Aster Residences",
-      "location": "San Juan City",
+      "photos": [],
       "category": "Repairs / Renovations",
-      "description": "Refined interiors with a fresh, contemporary feel.",
-      "photos": []
+      "location": "San Juan City",
+      "description": "Refined interiors with a fresh, contemporary feel."
     }
   ],
-  "about": [
+  "services": [
     {
-      "heading": "ABOUT TRI-STONE",
-      "text": "Tri-stone construction services takes on the role of main constructor for small to medium size project. Providing a quality construction services includes a new construction, renovation, remodels, repairs, exterior / interior fit-outs, and residential houses.\n\nIn particular we enjoy working with our clients and other members of project teams, to provide individual and innovative cost solution to each project brief.",
-      "second_heading": null,
-      "second_text": null,
-      "image": null
+      "icon": "ruler",
+      "name": "Residential Construction",
+      "image": "/Updated/images/Residential.jpg",
+      "icon_url": "/Updated/images/icon-ruler.svg",
+      "description": "Quality residential construction from planning to completion."
     },
     {
-      "heading": "Our Principles",
-      "text": "In the pursuit of this goals, we place God above all. And we shall be guided by principles of teamwork, Integrity, discipline, excellence and safety.",
-      "second_heading": null,
-      "second_text": null,
-      "image": null
+      "icon": "helmet",
+      "name": "Commercial Construction",
+      "image": "/Updated/images/commercial.jpg",
+      "icon_url": "/Updated/images/icon-helmet.svg",
+      "description": "Quality commercial construction from planning to completion."
     },
     {
-      "heading": "OUR VISION",
-      "text": "To be a responsible building constructor, delivering growth to our community beyond expectation.",
-      "second_heading": "OUR MISSION",
-      "second_text": "We will strive to implement a long-term relationship with our client, based on quality, timely service, safety and anticipation of their needs. Dedication to providing quality construction services.",
-      "image": null
+      "icon": "tools",
+      "name": "Repairs and Home Extension",
+      "image": "/Updated/images/repairs.jpg",
+      "icon_url": "/Updated/images/icon-tools.svg",
+      "description": "Repairs and home extensions done right."
+    },
+    {
+      "icon": "bolt",
+      "name": "Electrical Works",
+      "image": "/Updated/images/repairs.jpg",
+      "icon_url": "/Updated/images/service-icons/bolt.svg",
+      "description": "We can do your electrical works for you, lining, bulb fitting, even uncommon light fixtures,"
     }
-  ]
+  ],
+  "published_at": "2026-11-08 17:27"
 }
